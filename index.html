@@ -34,6 +34,7 @@
       --radius-field: 5px;
       --radius-btn: 8px;
     }
+    html, body { overflow-x: hidden; }
     html { scroll-behavior: smooth; }
     body { font-family: Inter, system-ui, sans-serif; color: var(--ink); }
 
@@ -69,63 +70,55 @@
       max-width: 100%;
       padding: 0 clamp(0.75rem, 2.5vw, 2rem);
       text-align: center;
-      font-weight: 600;
+      font-weight: 700;
       line-height: 0.9;
       letter-spacing: -0.04em;
       text-transform: uppercase;
-      font-size: clamp(3rem, 12.8vw, 8.25rem);
+      font-size: clamp(3.5rem, 13.5vw, 8.25rem);
       pointer-events: none;
     }
-    @media (min-width: 768px) {
-      .hero-title { white-space: normal; }
-    }
 
-    /* CTA pílula — fiel ao vetor do hero.svg */
+    /* CTA pílula WhatsApp */
     .hero-cta {
-      display: flex;
-      width: min(420px, calc(100vw - 2.5rem));
-      height: 53px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.875rem;
+      padding: 0 1rem 0 1.5rem;
+      height: 56px;
       border-radius: 9999px;
-      overflow: hidden;
-      background: #f5f5f4;
-      flex-shrink: 0;
-    }
-    .hero-cta__gelato {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 1.25rem;
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: #171717;
-      text-decoration: none;
-      transition: background 0.2s;
-      min-width: 0;
-    }
-    .hero-cta__gelato:hover { background: #fff; }
-    .hero-cta__wt {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0 0.5rem 0 1rem;
       background: #171717;
-      color: #fff;
-      text-decoration: none;
-      font-size: 0.875rem;
-      font-weight: 500;
       flex-shrink: 0;
-      transition: background 0.2s;
+      text-decoration: none;
+      transition: background 0.18s;
     }
-    .hero-cta__wt:hover { background: #000; }
+    .hero-cta:hover { background: #000; }
+    .hero-cta__label {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #fff;
+      white-space: nowrap;
+    }
+    .hero-cta__avatar-wrap {
+      position: relative;
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+    }
     .hero-cta__avatar {
-      width: 22px;
-      height: 22px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       object-fit: cover;
-      flex-shrink: 0;
     }
     .hero-cta__wa {
+      position: absolute;
+      right: 0;
+      bottom: 0;
       width: 22px;
       height: 22px;
       border-radius: 50%;
@@ -133,7 +126,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
+      border: 2px solid #171717;
     }
 
     .field-input {
@@ -206,21 +199,20 @@
         <spline-viewer url="https://prod.spline.design/ZV-IEsfO2pQnZilI/scene.splinecode"></spline-viewer>
       </div>
       <h1 class="hero-title">
-        Briefing Estratégico<br>Davvero Gelato
+        Briefing da<br>Vero Gelato
       </h1>
     </div>
 
     <div class="relative z-20 flex justify-center px-6 pb-10 sm:pb-12 shrink-0">
-      <div class="hero-cta">
-        <a href="#formulario" class="hero-cta__gelato">Vamos tomar um Gelato</a>
-        <a href="https://wa.me/5511982838497" target="_blank" rel="noopener noreferrer" class="hero-cta__wt">
-          <span>MEU WT</span>
-          <img src="assets/profile-getulio.jpg" alt="" class="hero-cta__avatar" width="22" height="22">
-          <span class="hero-cta__wa" aria-hidden="true">
+      <a href="https://wa.me/5511982838497" target="_blank" rel="noopener noreferrer" class="hero-cta">
+        <span class="hero-cta__label">WhatsApp</span>
+        <span class="hero-cta__avatar-wrap" aria-hidden="true">
+          <img src="assets/profile-getulio.jpg" alt="" class="hero-cta__avatar" width="36" height="36">
+          <span class="hero-cta__wa">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.558 4.126 1.528 5.87L.057 23.43l5.73-1.5A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.82c-1.96 0-3.79-.53-5.37-1.45l-.39-.23-3.39.89.9-3.3-.25-.4A9.82 9.82 0 012.18 12c0-5.422 4.398-9.82 9.82-9.82 5.422 0 9.82 4.398 9.82 9.82 0 5.422-4.398 9.82-9.82 9.82z"/></svg>
           </span>
-        </a>
-      </div>
+        </span>
+      </a>
     </div>
   </header>
 
@@ -242,8 +234,8 @@
         </p>
 
         <!-- headline principal -->
-        <h2 style="font-size: clamp(2.75rem, 6.5vw, 5.5rem); font-weight:600; line-height:1.0; letter-spacing:-0.035em; color:#fff; max-width:16ch;">
-          É o seu e-mail,<br>seu.
+        <h2 style="font-size: clamp(2.75rem, 6.5vw, 5.5rem); font-weight:700; line-height:1.0; letter-spacing:-0.035em; color:#fff; max-width:16ch;">
+          Acabei de receber,<br>muito obrigado.
         </h2>
 
         <!-- divisor sutil -->
@@ -251,7 +243,7 @@
 
         <!-- corpo -->
         <p style="font-size:1.125rem; line-height:1.65; color:rgba(255,255,255,0.58); max-width:46ch;">
-          Seu briefing acabou de chegar. Vou analisar e logo retorno com um documento — não com uma proposta.
+          Seu briefing chegou. Vou analisar e logo retorno com o documento de escopo da Fase 1.
         </p>
 
         <!-- assinatura discreta -->
