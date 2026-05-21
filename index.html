@@ -232,9 +232,11 @@
     </div>
 
     <div id="form-shell" class="w-full">
-      <form id="briefing-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <form id="briefing-form" action="https://formsubmit.co/ajax/getulio@raipp.com.br" method="POST">
         <input type="hidden" name="_subject" value="[Davvero] Briefing Estratégico — Fase 1">
-        <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off">
 
         <!-- Intro + contato -->
         <section class="w-full bg-white border-b border-line">
@@ -351,6 +353,15 @@
               <label class="choice-row"><input type="checkbox" name="d_pdv" value="Food Truck"><span>Food Truck / Tuk-tuk</span></label>
               <label class="choice-row"><input type="checkbox" name="d_pdv" value="Quiosque Container"><span>Quiosque Container</span></label>
             </div>
+            <div class="mt-8 pt-8 border-t border-line max-w-3xl">
+              <label class="choice-row">
+                <input type="checkbox" data-expander="d_extra">
+                <span>Tem mais alguma tipologia de PDV? Adicione aqui.</span>
+              </label>
+              <div id="d_extra" class="hidden mt-4">
+                <textarea class="field-input min-h-[120px] resize-y" name="d_pdv_extras" placeholder="Ex: Dark Kitchen, Carrinho de Praça, Stand de Eventos…"></textarea>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -416,30 +427,30 @@
     });
 
     (function () {
-      var PH = 'YOUR_FORM_ID';
       var form = document.getElementById('briefing-form');
       var shell = document.getElementById('form-shell');
       var ok = document.getElementById('success');
       var btn = document.getElementById('submit-btn');
-      if (form.action.includes(PH)) {
-        form.addEventListener('submit', function (e) {
-          e.preventDefault();
-          alert('Configure o Formspree: substitua YOUR_FORM_ID no action do formulário.');
-        });
-        return;
-      }
+
       form.addEventListener('submit', async function (e) {
         e.preventDefault();
         btn.disabled = true;
         btn.textContent = 'Enviando…';
         try {
-          var res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
-          if (!res.ok) throw new Error((await res.json().catch(function () { return {}; })).error || 'Falha no envio.');
+          var res = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { Accept: 'application/json' }
+          });
+          var data = await res.json().catch(function () { return {}; });
+          if (!res.ok || data.success === 'false' || data.success === false) {
+            throw new Error(data.message || 'Falha no envio. Tente novamente.');
+          }
           shell.classList.add('hidden');
           ok.classList.remove('hidden');
           window.scrollTo({ top: 0, behavior: 'smooth' });
         } catch (err) {
-          alert(err.message || 'Erro ao enviar.');
+          alert(err.message || 'Erro ao enviar. Tente novamente.');
           btn.disabled = false;
           btn.textContent = 'Enviar briefing';
         }
