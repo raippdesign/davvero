@@ -44,6 +44,7 @@
 
   a{color:inherit;text-decoration:none}
   .wrap{max-width:1120px;margin:0 auto;padding:0 32px}
+  @media(max-width:480px){.wrap{padding:0 22px}}
 
   /* Utility */
   .mono{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase}
@@ -51,22 +52,14 @@
   .serif{font-family:var(--serif)}
   .muted{color:var(--graphite)}
 
-  /* Nav */
-  nav{
-    position:sticky;top:0;z-index:50;
-    background:color-mix(in srgb,var(--bone) 88%,transparent);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--hair);
-  }
-  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:60px}
-  .brand{font-family:var(--serif);font-weight:600;font-size:1.05rem;letter-spacing:-.01em}
-  .brand .x{color:var(--graphite);font-weight:400;margin:0 .35em}
-  .nav-links{display:flex;gap:28px}
-  .nav-links a{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--graphite);transition:color .2s}
-  .nav-links a:hover{color:var(--ink)}
+  /* Brandmark (static, no menu, no links) */
+  .brandmark{font-family:var(--serif);font-weight:600;font-size:1rem;letter-spacing:-.01em;color:var(--ink);margin-bottom:56px}
+  .brandmark .x{color:var(--graphite);font-weight:400;margin:0 .35em}
+  @media(max-width:600px){.brandmark{margin-bottom:40px}}
 
   /* Hero */
   .hero{padding:88px 0 64px}
+  @media(max-width:600px){.hero{padding:52px 0 44px}}
   .hero .eyebrow{margin-bottom:26px}
   .hero h1{
     font-family:var(--serif);
@@ -127,6 +120,7 @@
 
   /* Section base */
   section{padding:78px 0}
+  @media(max-width:600px){section{padding:52px 0}}
   .sec-head{max-width:60ch;margin-bottom:8px}
   .sec-head h2{
     font-family:var(--serif);font-weight:500;
@@ -160,6 +154,7 @@
   .note-inline{margin-top:34px;display:flex;gap:16px;align-items:flex-start;background:var(--accent-soft);border:1px solid #C9D8CF;border-radius:8px;padding:22px 24px}
   .note-inline .tag{font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);white-space:nowrap;padding-top:3px}
   .note-inline p{font-size:1rem;color:var(--ink)}
+  @media(max-width:560px){.note-inline{flex-direction:column;gap:10px}}
 
   /* Credibility */
   .credibility{border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
@@ -187,6 +182,7 @@
   @media(max-width:460px){.flow{grid-template-columns:1fr}}
 
   .flow-tail{margin-top:40px;display:flex;align-items:center;gap:16px;border:1px dashed var(--graphite);border-radius:10px;padding:20px 24px;background:transparent}
+  @media(max-width:560px){.flow-tail{flex-direction:column;align-items:flex-start}}
   .flow-tail .ft-ico{width:44px;height:44px;flex:none;border-radius:50%;border:1px solid var(--graphite);display:flex;align-items:center;justify-content:center}
   .flow-tail .ft-ico svg{width:22px;height:22px;stroke:var(--graphite);stroke-width:1.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
   .flow-tail p{font-size:.98rem;color:var(--graphite)}
@@ -281,7 +277,15 @@
   .foot-links a:hover{color:var(--bone)}
   .foot-legal{margin-top:36px;border-top:1px solid rgba(255,255,255,.14);padding-top:22px;font-size:.82rem;color:#8A8477}
 
-  a.anchor{position:relative;top:-70px;visibility:hidden}
+  /* Mobile-first legibility: keep body copy at/above 16px, tighten line length */
+  @media(max-width:600px){
+    body{font-size:16px}
+    .step p,.mod li,.ib li,.flow-tail p{font-size:1rem}
+    .sec-head p,.hero-sub{font-size:1.05rem}
+    .prow .desc{font-size:1rem}
+    .kit-item p{font-size:.98rem}
+    .manifesto p{font-size:1.02rem}
+  }
 
   /* Reveal: visible by default (no-JS / Quick Look safe). Animation only if JS runs. */
   .reveal{opacity:1;transform:none}
@@ -296,22 +300,10 @@
 </head>
 <body>
 
-<nav>
-  <div class="wrap nav-inner">
-    <div class="brand">Raipp.<span class="x">×</span>Davvero</div>
-    <div class="nav-links">
-      <a href="#abordagem">Abordagem</a>
-      <a href="#processo">Processo</a>
-      <a href="#fase1">Fase 1</a>
-      <a href="#investimento">Investimento</a>
-    </div>
-
-  </div>
-</nav>
-
 <!-- HERO -->
 <header class="hero">
   <div class="wrap">
+    <div class="brandmark">Raipp.<span class="x">×</span>Davvero</div>
     <span class="eyebrow reveal">Proposta comercial · Rebranding enxuto · Fase 1</span>
     <h1 class="reveal">Uma <em>nova atmosfera</em> para a Davvero.</h1>
     <p class="hero-sub reveal">Fora o rosa e o azul marinho. No lugar, uma cor nova e um sistema visual que se sustenta em cada ponto de contato. <strong>Este é o passo um. E é só o começo.</strong></p>
@@ -342,7 +334,6 @@
 </header>
 
 <!-- MANIFESTO -->
-<span class="anchor" id="abordagem"></span>
 <section class="manifesto">
   <div class="wrap">
     <span class="eyebrow reveal">O ponto de partida</span>
@@ -420,7 +411,6 @@
 </section>
 
 <!-- PROCESS DIAGRAM -->
-<span class="anchor" id="processo"></span>
 <section class="process">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -488,7 +478,6 @@
 </section>
 
 <!-- PHASE 1 DETAIL -->
-<span class="anchor" id="fase1"></span>
 <section class="fase1">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -665,7 +654,6 @@
 </section>
 
 <!-- INVESTMENT -->
-<span class="anchor" id="investimento"></span>
 <section class="invest">
   <div class="wrap">
     <span class="eyebrow reveal">Investimento</span>
@@ -722,7 +710,6 @@
 </section>
 
 <!-- CLOSE -->
-<span class="anchor" id="proximos"></span>
 <section class="close">
   <div class="wrap">
     <div class="sec-head reveal">
